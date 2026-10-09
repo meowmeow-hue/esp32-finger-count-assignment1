@@ -1,6 +1,7 @@
+import argparse
 import cv2
 import mediapipe as mp
-import time
+import sys
 
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
@@ -47,60 +48,79 @@ def count_fingers(hand_landmarks, handedness):
 
 
 def main():
-    cap = cv2.VideoCapture(0)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    parser = argparse.ArgumentParser(
+        description="Count fingers in the ESP32-CAM live stream."
+    )
+    parser.add_argument(
+        "--ip",
+        required=True,
+        help="ESP32-CAM IP address shown in the Arduino Serial Monitor",
+    )
+    args = parser.parse_args()
 
+    stream_url = f"http://{args.ip}:81/stream"
+    cap = cv2.VideoCapture(stream_url)
+    if not cap.isOpened():
+        cap.release()
+        raise SystemExit(
+            f"Error: could not open {stream_url}. Check the ESP32-CAM IP, "
+            "camera stream, and Wi-Fi connection."
+        )
 
-    with mp_hands.Hands(
-        max_num_hands=2,
-        model_complexity=1,
-        min_detection_confidence=0.5,
-        min_tracking_confidence=0.5
-    ) as hands:
+    try:
+        with mp_hands.Hands(
+            max_num_hands=2,
+            model_complexity=1,
+            min_detection_confidence=0.5,
+            min_tracking_confidence=0.5
+        ) as hands:
 
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                break
-
-            frame = cv2.flip(frame, 1)
-            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = hands.process(rgb)
-
-            if results.multi_hand_landmarks:
-                for hand_landmarks, handedness in zip(
-                        results.multi_hand_landmarks,
-                        results.multi_handedness):
-
-                    mp_drawing.draw_landmarks(
-                        frame,
-                        hand_landmarks,
-                        mp_hands.HAND_CONNECTIONS
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    print(
+                        "Error: lost the ESP32-CAM video stream.",
+                        file=sys.stderr,
                     )
+                    break
 
-                    label = handedness.classification[0].label
-                    num_fingers = count_fingers(hand_landmarks, label)
+                frame = cv2.flip(frame, 1)
+                rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                results = hands.process(rgb)
 
-                    print(f"Hand: {label}, Fingers up: {num_fingers}")
+                if results.multi_hand_landmarks:
+                    for hand_landmarks, handedness in zip(
+                            results.multi_hand_landmarks,
+                            results.multi_handedness):
 
-                    cv2.putText(
-                        frame,
-                        f"{label}: {num_fingers}",
-                        (10, 60 if label == "Right" else 120),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        1.5,
-                        (0, 255, 0),
-                        3
-                    )
+                        mp_drawing.draw_landmarks(
+                            frame,
+                            hand_landmarks,
+                            mp_hands.HAND_CONNECTIONS
+                        )
 
-            cv2.imshow("Finger Count (0–5)", frame)
+                        label = handedness.classification[0].label
+                        num_fingers = count_fingers(hand_landmarks, label)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                        print(f"Hand: {label}, Fingers up: {num_fingers}")
 
-    cap.release()
-    cv2.destroyAllWindows()
+                        cv2.putText(
+                            frame,
+                            f"{label}: {num_fingers}",
+                            (10, 60 if label == "Right" else 120),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            1.5,
+                            (0, 255, 0),
+                            3
+                        )
+
+                cv2.imshow("Finger Count (0–5)", frame)
+
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+    finally:
+        cap.release()
+        cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":

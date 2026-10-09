@@ -47,7 +47,7 @@ python finger_count.py --ip 192.168.1.100
 
 Hold your hand in front of the ESP32-CAM. A window displays the video, hand landmarks, and a finger count. Press **q** to close it.
 
-The program reads the ESP32-CAM MJPEG stream using `cv2.VideoCapture("http://ESP32_IP:81/stream")`; it does **not** use the laptop's built-in webcam. MediaPipe identifies 21 hand landmarks and the script estimates which fingers are extended using joint angles and distances. This simple technique may miscount when the hand is rotated, partially hidden, or poorly lit.
+The program reads the ESP32-CAM MJPEG stream using `cv2.VideoCapture("http://ESP32_IP:81/stream")`; it does **not** use the laptop's built-in webcam. MediaPipe identifies 21 hand landmarks, and the script estimates which fingers are extended by comparing fingertip positions with finger-joint positions (and thumb-tip position with the thumb joint). This simple technique may miscount when the hand is rotated, partially hidden, or poorly lit.
 
 ## Evidence/screenshots to add after running
 
@@ -55,6 +55,7 @@ Place your **own** images inside `screenshots/`, then replace these placeholders
 
 - [ ] `arduino_board_selection.png` — correct board and port in Arduino IDE
 - [ ] `serial_monitor_ip.png` — ESP32-CAM IP visible (hide Wi-Fi credentials)
+- [ ] `camera_stream.png` — live ESP32-CAM stream open in a browser
 - [ ] `finger_count_1.png` — showing one finger, correctly detected
 - [ ] `finger_count_3.png` — showing three fingers, correctly detected
 - [ ] `finger_count_5.png` — showing five fingers, correctly detected
