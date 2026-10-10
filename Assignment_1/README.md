@@ -55,7 +55,7 @@ This video demonstrates the finger-counting detection system for Assignment 1 us
 
 ### Finger Counting Video
 
-**[▶ Watch Assignment 1 Finger Counting Video](videos/assignment%201%20video.MOV)**
+**[▶ Watch Finger Counting Demo](videos/finger_count_demo.mp4)**
 
 The project uses MediaPipe to detect 21 hand landmarks and count raised fingers.
 
