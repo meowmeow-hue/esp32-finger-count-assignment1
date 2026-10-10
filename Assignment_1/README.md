@@ -49,10 +49,6 @@ Hold your hand in front of the ESP32-CAM. A window displays the video, hand land
 
 The program reads the ESP32-CAM MJPEG stream using `cv2.VideoCapture("http://ESP32_IP:81/stream")`; it does **not** use the laptop's built-in webcam. MediaPipe identifies 21 hand landmarks, and the script estimates which fingers are extended by comparing fingertip positions with finger-joint positions (and thumb-tip position with the thumb joint). This simple technique may miscount when the hand is rotated, partially hidden, or poorly lit.
 
-## Video Demonstration
-
-This video demonstrates the finger-counting detection system for Assignment 1 using Python, OpenCV, and MediaPipe.
-
 ## Finger Counting Video Demonstration
 
 This video demonstrates the finger-counting project using Python, OpenCV, and MediaPipe.
