@@ -53,15 +53,13 @@ The program reads the ESP32-CAM MJPEG stream using `cv2.VideoCapture("http://ESP
 
 This video demonstrates the finger-counting detection system for Assignment 1 using Python, OpenCV, and MediaPipe.
 
-### Finger Counting Video
+## Finger Counting Video Demonstration
 
-**[▶ Watch Finger Counting Demo](videos/finger_count_demo.mp4)**
+This video demonstrates the finger-counting project using Python, OpenCV, and MediaPipe.
 
-The project uses MediaPipe to detect 21 hand landmarks and count raised fingers.
+**[▶ Click Here to Watch or Download the Finger Counting Video](videos/finger_count_demo.mp4)**
 
-### Results
-
-The finger-counting demonstration is provided in the video above. The system processes camera frames, detects hand landmarks, and displays the finger count in real time.
+The demonstration shows hand landmark detection and finger-counting results in real time.
 
 ### Technologies Used
 
