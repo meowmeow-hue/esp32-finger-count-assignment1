@@ -49,36 +49,26 @@ Hold your hand in front of the ESP32-CAM. A window displays the video, hand land
 
 The program reads the ESP32-CAM MJPEG stream using `cv2.VideoCapture("http://ESP32_IP:81/stream")`; it does **not** use the laptop's built-in webcam. MediaPipe identifies 21 hand landmarks, and the script estimates which fingers are extended by comparing fingertip positions with finger-joint positions (and thumb-tip position with the thumb joint). This simple technique may miscount when the hand is rotated, partially hidden, or poorly lit.
 
-## Evidence/screenshots to add after running
+## Video Demonstration
 
-Place your **own** images inside `screenshots/`, then replace these placeholders with working links:
+This video demonstrates the finger-counting detection system for Assignment 1 using Python, OpenCV, and MediaPipe.
 
-- [ ] `arduino_board_selection.png` — correct board and port in Arduino IDE
-- [ ] `serial_monitor_ip.png` — ESP32-CAM IP visible (hide Wi-Fi credentials)
-- [ ] `camera_stream.png` — live ESP32-CAM stream open in a browser
-- [ ] `finger_count_1.png` — showing one finger, correctly detected
-- [ ] `finger_count_3.png` — showing three fingers, correctly detected
-- [ ] `finger_count_5.png` — showing five fingers, correctly detected
+### Finger Counting Video
 
-Example Markdown once an image exists: `![Five fingers detected](screenshots/finger_count_5.png)`
+**[▶ Watch Assignment 1 Finger Counting Video](videos/assignment%201%20video.MOV)**
 
-## Finger Counting Sample Images
+The project uses MediaPipe to detect 21 hand landmarks and count raised fingers.
 
-### Right Hand - 3 Fingers
+### Results
 
-![Right Hand](screenshots/right_3.png)
+The finger-counting demonstration is provided in the video above. The system processes camera frames, detects hand landmarks, and displays the finger count in real time.
 
-### Left Hand - 4 Fingers
+### Technologies Used
 
-![Left Hand](screenshots/left_4.png)
-
-### Both Hands - Right 5, Left 2
-
-![Both Hands](screenshots/both_hands.png)
-
-## Results
-
-**Status: Pending physical hardware test.** Update this paragraph with actual observations after running on your ESP32-CAM. Do not report tests as successful until they have been performed.
+- Python 3.11
+- OpenCV
+- MediaPipe 0.10.11
+- ESP32-CAM (camera hardware for the assignment)
 
 ## Troubleshooting
 
