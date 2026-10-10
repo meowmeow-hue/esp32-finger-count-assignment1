@@ -1,16 +1,26 @@
 # Assignment 1 — Finger Count Detection Using ESP32-CAM
 
-This repository contains my IoT Assignment 1 project: using an **AI Thinker ESP32-CAM** as an IP video camera and **Python, OpenCV, and MediaPipe** on a computer to count fingers in real time.
+## Project Overview
 
-**Project status:** Code and setup instructions prepared; **ESP32-CAM hardware demonstration pending**. Real screenshots and verified results will be added after borrowing and testing the camera.
+This project demonstrates real-time finger counting using Python, OpenCV, and MediaPipe, with ESP32-CAM integration described in the setup instructions.
 
-➡️ **[Open Assignment 1 instructions](Assignment_1/README.md)**
+## Project Files
 
-## Files
-- `Assignment_1/finger_count.py`: finger-count detection from ESP32-CAM's MJPEG stream
-- `Assignment_1/requirements.txt`: Python dependencies
-- `Assignment_1/screenshots/`: place the actual demonstration screenshots here
-- `Assignment_1/README.md`: full setup, execution and submission guide
+- `Assignment_1/finger_count.py` — Finger-counting program
+- `Assignment_1/requirements.txt` — Python dependencies
+- `Assignment_1/README.md` — Setup instructions and documentation
+- `Assignment_1/videos/finger_count_demo.mp4` — Video demonstration
 
-## Credit
-Implementation follows the teacher's prescribed ESP32-CAM setup and the [Finger Count using MediaPipe](https://theara-seng.github.io/posts/2026-01-01-Finger_count) tutorial, with adaptations for an ESP32-CAM IP stream and geometric finger-state checks.
+## Video Demonstration
+
+[▶ Watch or Download Finger Counting Video](Assignment_1/videos/finger_count_demo.mp4)
+
+The video provides a demonstration of hand detection and finger counting.
+
+## Hardware Integration
+
+The project is configured to use an AI Thinker ESP32-CAM camera stream. Hardware integration must be verified with the physical device.
+
+## Reference
+
+[Finger Count using MediaPipe](https://theara-seng.github.io/posts/2026-01-01-Finger_count)
